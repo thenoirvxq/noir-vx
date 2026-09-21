@@ -1,31 +1,11 @@
  <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOIR VX</title>
+<title>NOIR VX // GHOST</title>
 <style>
-body{background:#050507;color:#00ff88;font-family:monospace;padding:20px}
-h1{color:white;font-size:50px} h1 span{color:#00ff88}
-.box{border:1px solid #0f2a0f;padding:15px;margin-top:20px;background:#0a0f0a}
-</style>
-</head>
-<body>
-<h1>NOIR <span>VX</span></h1>
-<div class="box">
-<p>> STATUS: ONLINE</p>
-<p>> USER: thenoirvxq</p>
-<p>> LOCATION: urnotgettingit, UN</p>
-<p id="ip">> IP: Loading...</p>
-<p>> STRIKE MODE: ACTIVE</p>
-<p>> SYSTEM: SECURED</p>
-</div>
-<script>
-fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>{
-document.getElementById('ip').innerText = '> IP: ' + d.ip
-}).catch(()=>{
-document.getElementById('ip').innerText = '> IP: Hidden'
-})
-</script>
-</body>
-</html>
+body{margin:0;background:#000;color:#00ff88;font-family:monospace;overflow:hidden}
+canvas{position:fixed;top:0;left:0;z-index:-1}
+.content{padding:30px;position:relative;z-index:1}
+h1{font-size:60px;margin:0;color:#fff;letter-spacing:5px}
+h1 span{color:#00ff88;text-shadow:0 
