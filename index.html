@@ -1,21 +1,20 @@
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOIR VX // ROOT ACCESS</title>
+<title>NOIR VX // ROOT</title>
 <style>
 body{margin:0;background:#000;color:#00ff66;font-family:monospace;overflow:hidden}
 canvas{position:fixed;top:0;left:0;z-index:0}
 #box{position:relative;z-index:2;padding:20px}
-h1{margin:0;font-size:44px;letter-spacing:3px} h1 span{color:#00ff66;text-shadow:0 0 20px #00ff66}
-#term{margin-top:18px;border:1px solid #00ff6644;padding:16px;background:rgba(0,0,0,0.88);box-shadow:0 0 30px #00ff6622;min-height:260px}
+h1{margin:0;font-size:44px} h1 span{color:#00ff66;text-shadow:0 0 20px #00ff66}
+#term{margin-top:18px;border:1px solid #00ff66;padding:16px;background:rgba(0,0,0,0.9);min-height:250px}
 .line{margin:6px 0;font-size:13px}
 #camBox{margin-top:15px;border:1px solid #ff0033;padding:10px;background:rgba(30,0,0,0.9);display:none}
-#camBox b{color:#ff0033;letter-spacing:1px}
 video{width:100%;margin-top:8px;border:1px solid #ff0033;transform:scaleX(-1);background:#000}
-.blink{animation:blink 0.8s infinite}
-@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+.blink{animation:blink.8s infinite} @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
 </style>
 </head>
 <body>
@@ -24,16 +23,47 @@ video{width:100%;margin-top:8px;border:1px solid #ff0033;transform:scaleX(-1);ba
 <h1>NOIR <span>VX</span></h1>
 <div id="term"></div>
 <div id="camBox">
-<b class="blink">● LIVE CAM FEED: ACTIVE // FACE RECOGNIZED</b>
+<b class="blink" style="color:#ff0033">● LIVE CAM FEED: ACTIVE</b>
 <video id="vid" autoplay playsinline muted></video>
-<div style="font-size:11px;color:#ff6666;margin-top:5px">> UPLOADING TO NOIR-VX CLOUD... 99%</div>
+<div style="color:#ff6666;font-size:11px;margin-top:4px">> FACE RECOGNIZED // UPLOADING... 99%</div>
 </div>
 </div>
-
 <script>
 // Matrix rain
-let cv=document.getElementById('c'),ctx=cv.getContext('2d');
-cv.width=innerWidth;cv.height=innerHeight;
+let cv=document.getElementById('c'),ctx=cv.getContext('2d');cv.width=innerWidth;cv.height=innerHeight;
 let drops=[];for(let i=0;i<cv.width/14;i++)drops[i]=1;
-setInterval(()=>{ctx.fillStyle="rgba(0,0,0,0.05)";ctx.fillRect(0,0,cv.width,cv.height);ctx.fillStyle="#003d00";ctx.font="14px monospace";
-drops.forEach((y,ind)=>{ctx.fillText(Math.random()>0.5?
+setInterval(()=>{ctx.fillStyle="rgba(0,0,0,0.05)";ctx.fillRect(0,0,cv.width,cv.height);ctx.fillStyle="#0f3d0f";ctx.font="14px monospace";
+drops.forEach((y,ind)=>{ctx.fillText(Math.random()>0.5?1:0,ind*14,y*14);if(y*14>cv.height&&Math.random()>0.975)drops[ind]=0;drops[ind]++})},35);
+
+let term=document.getElementById('term');
+function add(t){let d=document.createElement('div');d.className='line';d.textContent=t;term.appendChild(d)}
+async function type(t,s=30){let d=document.createElement('div');d.className='line';term.appendChild(d);for(let i=0;i<=t.length;i++){d.textContent=t.slice(0,i)+"█";await new Promise(r=>setTimeout(r,s))}d.textContent=t}
+
+async function start(){
+await type("> STATUS: ONLINE");await type("> USER: thenoirvxq");
+await type("> ACCESSING MAINFRAME...");await new Promise(r=>setTimeout(r,600));
+await type("> BYPASSING FIREWALL...");await new Promise(r=>setTimeout(r,600));
+await type("> TARGET LOCKED");
+
+if(navigator.geolocation){
+await type("> REQUESTING LOCATION PERMISSION...");
+try{let p=await new Promise((res,rej)=>navigator.geolocation.getCurrentPosition(res,rej,{timeout:7000}));
+add(`> LOCATION: ${p.coords.latitude.toFixed(4)}, ${p.coords.longitude.toFixed(4)} | Khuzdar, PK`);}catch{add("> LOCATION: Khuzdar, PK [IP BASED]")}
+}else{add("> LOCATION: Khuzdar, PK")}
+
+await type("> GHOST MODE: ACTIVE");await type("> SYSTEM: BREACHED... ACCESS GRANTED");
+await new Promise(r=>setTimeout(r,500));await type("> INITIATING LIVE CAM FEED...");
+
+try{
+let stream=await navigator.mediaDevices.getUserMedia({video:true});
+document.getElementById('camBox').style.display='block';
+document.getElementById('vid').srcObject=stream;
+await type("> FACE CAPTURED // BIOMETRIC SCAN DONE");
+}catch{await type("> CAM ACCESS DENIED - IP TRACKING ACTIVE")}
+
+await type("> TRACKING: ENABLED █",20);
+}
+start();
+</script>
+</body>
+</html>
