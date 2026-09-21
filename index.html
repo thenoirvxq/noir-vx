@@ -1,18 +1,31 @@
  <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOIR VX // TRACKER</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIR VX</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#050507;color:#fff;font-family:'JetBrains Mono',monospace;overflow-x:hidden}
-nav{display:flex;justify-content:space-between;padding:20px 6%;border-bottom:1px solid #151515}
-.logo{font-family:'Space Grotesk';letter-spacing:4px;font-weight:700}.logo span{color:#6c5cff}
-.hero{padding:60px 6% 20px}.hero h1{font-family:'Space Grotesk';font-size:clamp(40px,9vw,100px);line-height:.9;letter-spacing:-3px}
-.hero h1 i{color:#6c5cff;font-style:normal}
-.terminal{margin:20px 6%;border:1px solid #1e1e1e;background:#0a0a0c;padding:20px;border-radius:12px;position:relative}
-.terminal::before{content:'● ● ●';position:absolute;top:10px;right:15px;color:#222;letter-spacing:4px;font-size:10px}
-.line{color:#555;margin:4px 0;font-size:13px}.line b{color:#fff}
-#ip{font-size:28px;color:#6c5cff;font-weight:700;margin:10px 0;text-shadow:0 0 15px #6c5cff}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:#1
+body{background:#050507;color:#00ff88;font-family:monospace;padding:20px}
+h1{color:white;font-size:50px} h1 span{color:#00ff88}
+.box{border:1px solid #0f2a0f;padding:15px;margin-top:20px;background:#0a0f0a}
+</style>
+</head>
+<body>
+<h1>NOIR <span>VX</span></h1>
+<div class="box">
+<p>> STATUS: ONLINE</p>
+<p>> USER: thenoirvxq</p>
+<p>> LOCATION: urnotgettingit, UN</p>
+<p id="ip">> IP: Loading...</p>
+<p>> STRIKE MODE: ACTIVE</p>
+<p>> SYSTEM: SECURED</p>
+</div>
+<script>
+fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>{
+document.getElementById('ip').innerText = '> IP: ' + d.ip
+}).catch(()=>{
+document.getElementById('ip').innerText = '> IP: Hidden'
+})
+</script>
+</body>
+</html>
