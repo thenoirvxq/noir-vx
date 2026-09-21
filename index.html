@@ -1,11 +1,41 @@
  <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOIR VX // GHOST</title>
+<title>NOIR VX - GHOST</title>
 <style>
 body{margin:0;background:#000;color:#00ff88;font-family:monospace;overflow:hidden}
-canvas{position:fixed;top:0;left:0;z-index:-1}
-.content{padding:30px;position:relative;z-index:1}
-h1{font-size:60px;margin:0;color:#fff;letter-spacing:5px}
-h1 span{color:#00ff88;text-shadow:0 
+canvas{position:fixed;top:0;left:0;z-index:-1;opacity:0.3}
+.content{position:relative;z-index:1;padding:30px}
+h1{color:white;font-size:60px;margin:0} h1 span{color:#00ff88;text-shadow:0 0 20px #00ff88}
+.box{border:1px solid #00ff8855;background:#00110077;padding:20px;margin-top:30px;backdrop-filter:blur(5px)}
+.cursor{animation:blink 1s infinite} @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="content">
+<h1>NOIR <span>VX</span></h1>
+<div class="box">
+<p id="line1"></p>
+<p id="line2"></p>
+<p id="line3"></p>
+<p id="line4"></p>
+<p id="line5"></p>
+<p>> <span class="cursor">█</span></p>
+</div>
+</div>
+<script>
+// Matrix
+const canvas=document.getElementById('c'); const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+let chars="01"; let cols=Math.floor(canvas.width/14); let drops=Array(cols).fill(1);
+function draw(){ctx.fillStyle="rgba(0,0,0,0.05)";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle="#00ff88";ctx.font="14px monospace";drops.forEach((y,i)=>{ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*14,y*14);if(y*14>canvas.height&&Math.random()>0.975)drops[i]=0;drops[i]++});} setInterval(draw,35);
+
+// Typing effect
+const lines=["STATUS: ONLINE","USER: thenoirvxq","LOCATION: Khuzdar, PK","GHOST MODE: ACTIVE","SYSTEM: BREACHED... ACCESS GRANTED"];
+let l=0; function typeLine(){if(l>=lines.length)return; let el=document.getElementById('line'+(l+1)); let text="> "+lines[l]; let j=0; let iv=setInterval(()=>{el.textContent=text.slice(0,j++); if(j>text.length){clearInterval(iv); l++; setTimeout(typeLine,400)}},30);} typeLine();
+</script>
+</body>
+</html>
